@@ -1,0 +1,26 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+
+# Local tooling
+.codex
+
+# Local datasets and generated artifacts
+data/
+example/
+results*/
+ser_*_smoke/
+wav2vec2_checkpoints/
+
+# OS/editor noise
+.DS_Store
