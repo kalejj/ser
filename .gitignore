@@ -17,9 +17,6 @@ wheels/
 
 # Local datasets and generated artifacts
 data/
-example/
-results*/
-ser_*_smoke/
 wav2vec2_checkpoints/
 
 # OS/editor noise

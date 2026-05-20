@@ -1,0 +1,4 @@
+model,accuracy_pct,correct,total,elapsed_seconds
+plus_large,46.29,162,350,50.7
+plus_base,40.29,141,350,82.0
+plus_seed,37.43,131,350,86.3

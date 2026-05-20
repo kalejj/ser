@@ -40,7 +40,7 @@ def build_samples(
         random.seed(seed)
 
     for emo_dir in discover_emotion_dirs(wav_dir):
-        pool = list(emo_dir.rglob("*.wav"))
+        pool = sorted(emo_dir.rglob("*.wav"), key=lambda p: p.as_posix())
         if not pool:
             raise ValueError(f"감정 폴더 '{emo_dir.name}'에 WAV가 없습니다.")
 
@@ -73,6 +73,55 @@ def build_samples(
                 }
             )
         per_emotion[emo_dir.name] = len(chosen)
+
+    return samples, per_emotion
+
+
+def load_samples_from_csv(
+    csv_path: Path,
+    wav_dir: Path,
+    label_dir: Path,
+) -> tuple[list[dict], dict[str, int]]:
+    samples: list[dict] = []
+    per_emotion: dict[str, int] = {}
+
+    with open(csv_path, newline="", encoding="utf-8") as fp:
+        reader = csv.DictReader(fp)
+        if "wav_relpath" not in (reader.fieldnames or []):
+            raise ValueError(f"{csv_path}에 wav_relpath 컬럼이 없습니다.")
+
+        seen: set[str] = set()
+        for row in reader:
+            rel_text = row["wav_relpath"]
+            if rel_text in seen:
+                raise ValueError(f"샘플 목록에 중복 WAV가 있습니다: {rel_text}")
+            seen.add(rel_text)
+
+            rel = Path(rel_text)
+            wav_path = wav_dir / rel
+            if not wav_path.is_file():
+                raise FileNotFoundError(f"WAV가 없습니다: {wav_path}")
+
+            label_path = label_dir / rel.with_suffix(".json")
+            if not label_path.is_file():
+                raise FileNotFoundError(
+                    f"라벨이 없습니다: {label_path} (wav: {wav_path})"
+                )
+            with open(label_path, encoding="utf-8") as label_fp:
+                data = json.load(label_fp)
+            speaker = data["화자정보"]
+            samples.append(
+                {
+                    "wav_path": wav_path,
+                    "wav_relpath": rel.as_posix(),
+                    "gt_emotion": speaker["Emotion"],
+                    "gt_sensitivity": speaker["Sensitivity"],
+                }
+            )
+            per_emotion[rel.parts[0]] = per_emotion.get(rel.parts[0], 0) + 1
+
+    if not samples:
+        raise ValueError(f"샘플 목록이 비어 있습니다: {csv_path}")
 
     return samples, per_emotion
 

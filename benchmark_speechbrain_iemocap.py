@@ -13,6 +13,7 @@ from benchmark_common import (
     LABEL_DIR,
     WAV_DIR,
     build_samples,
+    load_samples_from_csv,
     norm_gt,
     write_csv,
 )
@@ -246,6 +247,12 @@ def parse_args() -> argparse.Namespace:
         default=Path("results_speechbrain_iemocap"),
         help="결과 저장 디렉터리 (기본: results_speechbrain_iemocap)",
     )
+    parser.add_argument(
+        "--sample-list-csv",
+        type=Path,
+        default=None,
+        help="기존 결과 CSV의 wav_relpath 순서를 그대로 재사용합니다.",
+    )
     return parser.parse_args()
 
 
@@ -260,15 +267,25 @@ def main():
     results_dir = args.results_dir
     results_dir.mkdir(parents=True, exist_ok=True)
 
-    samples, per_emotion = build_samples(
-        WAV_DIR, LABEL_DIR, n_per_emotion, args.seed
-    )
-    if use_all:
-        mode_desc = "감정당 전체"
+    if args.sample_list_csv is not None:
+        samples, per_emotion = load_samples_from_csv(
+            args.sample_list_csv, WAV_DIR, LABEL_DIR
+        )
+        mode_desc = f"샘플 목록 CSV 사용: {args.sample_list_csv}"
         seed_desc = "(샘플링 없음)"
     else:
-        mode_desc = f"감정당 {n_arg}개"
-        seed_desc = f"seed={args.seed}"
+        samples, per_emotion = build_samples(
+            WAV_DIR, LABEL_DIR, n_per_emotion, args.seed
+        )
+        if use_all:
+            mode_desc = "감정당 전체"
+            seed_desc = "(샘플링 없음)"
+        else:
+            mode_desc = f"감정당 {n_arg}개"
+            seed_desc = f"seed={args.seed}"
+    if use_all and args.sample_list_csv is None:
+        mode_desc = "감정당 전체"
+        seed_desc = "(샘플링 없음)"
     print(
         f"감정 폴더 {len(per_emotion)}개 / 샘플 총 {len(samples)}개 "
         f"({mode_desc}, {seed_desc})\n"
@@ -290,9 +307,12 @@ def main():
     meta = {
         "total_files": len(samples),
         "per_emotion_sampled": per_emotion,
-        "random_seed": None if use_all else args.seed,
-        "samples_per_emotion": None if use_all else n_arg,
-        "full_emotion_pools": use_all,
+        "random_seed": None if use_all or args.sample_list_csv else args.seed,
+        "samples_per_emotion": None if use_all or args.sample_list_csv else n_arg,
+        "sample_list_csv": (
+            args.sample_list_csv.as_posix() if args.sample_list_csv else None
+        ),
+        "full_emotion_pools": use_all and args.sample_list_csv is None,
         "models": {
             MODEL_KEY: {
                 "model_id": MODEL_ID,

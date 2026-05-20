@@ -1,0 +1,114 @@
+{
+  "total_files": 350,
+  "per_emotion_sampled": {
+    "1.기쁨": 50,
+    "2.슬픔": 50,
+    "3.분노": 50,
+    "4.불안": 50,
+    "5.상처": 50,
+    "6.당황": 50,
+    "7.중립": 50
+  },
+  "random_seed": 42,
+  "samples_per_emotion": 50,
+  "models": {
+    "plus_seed": {
+      "model_id": "iic/emotion2vec_plus_seed",
+      "elapsed_seconds": 42.9,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 107,
+          "ratio": 0.3057
+        },
+        "happy": {
+          "count": 89,
+          "ratio": 0.2543
+        },
+        "neutral": {
+          "count": 64,
+          "ratio": 0.1829
+        },
+        "sad": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "fearful": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "angry": {
+          "count": 20,
+          "ratio": 0.0571
+        }
+      }
+    },
+    "plus_base": {
+      "model_id": "iic/emotion2vec_plus_base",
+      "elapsed_seconds": 42.9,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 125,
+          "ratio": 0.3571
+        },
+        "neutral": {
+          "count": 81,
+          "ratio": 0.2314
+        },
+        "sad": {
+          "count": 52,
+          "ratio": 0.1486
+        },
+        "happy": {
+          "count": 48,
+          "ratio": 0.1371
+        },
+        "angry": {
+          "count": 26,
+          "ratio": 0.0743
+        },
+        "fearful": {
+          "count": 17,
+          "ratio": 0.0486
+        },
+        "disgusted": {
+          "count": 1,
+          "ratio": 0.0029
+        }
+      }
+    },
+    "plus_large": {
+      "model_id": "iic/emotion2vec_plus_large",
+      "elapsed_seconds": 47.9,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 101,
+          "ratio": 0.2886
+        },
+        "sad": {
+          "count": 79,
+          "ratio": 0.2257
+        },
+        "happy": {
+          "count": 74,
+          "ratio": 0.2114
+        },
+        "neutral": {
+          "count": 36,
+          "ratio": 0.1029
+        },
+        "angry": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "fearful": {
+          "count": 24,
+          "ratio": 0.0686
+        },
+        "disgusted": {
+          "count": 1,
+          "ratio": 0.0029
+        }
+      }
+    }
+  }
+}

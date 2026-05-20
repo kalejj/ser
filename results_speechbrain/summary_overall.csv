@@ -1,0 +1,2 @@
+model,accuracy_pct,correct,total,elapsed_seconds
+speechbrain_iemocap,30.0,60,200,479.4

@@ -45,22 +45,34 @@ data/
 emotion2vec 3개 모델 비교:
 
 ```bash
-uv run python benchmark_emotion2vec.py --samples-per-emotion 50 --results-dir results_50
+uv run python benchmark_emotion2vec.py --samples-per-emotion 50 --results-dir results_emotion2vec_50
 ```
 
 audEERING MSP-DIM:
 
 ```bash
-uv run python benchmark_audeering_msp_dim.py --samples-per-emotion 10 --results-dir results_audeering_10
+uv run python benchmark_audeering_msp_dim.py --samples-per-emotion 10 --results-dir results_audeering_50
 ```
 
 SpeechBrain IEMOCAP:
 
 ```bash
-uv run python benchmark_speechbrain_iemocap.py --samples-per-emotion 10 --results-dir results_speechbrain_10
+uv run python benchmark_speechbrain_iemocap.py --samples-per-emotion 10 --results-dir results_speechbrain_50
 ```
 
 전체 데이터를 쓰고 싶으면 `--samples-per-emotion`을 생략하거나 `0`으로 주면 됩니다.
+
+이미 만든 결과 CSV와 같은 샘플 목록을 재사용하려면 `--sample-list-csv`를 사용합니다. 이 옵션은 CSV의 `wav_relpath` 컬럼을 읽어서 같은 순서의 WAV만 다시 평가하므로,
+서로 다른 모델을 동일 샘플 기준으로 비교할 때 사용합니다.
+
+```bash
+uv run python benchmark_emotion2vec.py --sample-list-csv results_0408/plus_base.csv --results-dir results_emotion2vec
+uv run python benchmark_audeering_msp_dim.py --sample-list-csv results_0408/plus_base.csv --results-dir results_audeering
+uv run python benchmark_speechbrain_iemocap.py --sample-list-csv results_0408/plus_base.csv --results-dir results_speechbrain
+```
+
+`--sample-list-csv`를 지정하면 새로 랜덤 샘플링하지 않으므로 `--samples-per-emotion`과 `--seed`는 결과 샘플 선정에 영향을 주지 않습니다.
+예시의 `results_0408/plus_base.csv`는 감정별 50개씩 총 350개 샘플을 담은 기준 목록입니다.
 
 ## 결과물
 

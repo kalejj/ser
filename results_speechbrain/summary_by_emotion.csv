@@ -1,0 +1,8 @@
+emotion_display,mapped_target,mapping_type,speechbrain_iemocap_pct,speechbrain_iemocap_correct,speechbrain_iemocap_total,speechbrain_iemocap_report
+기쁨(Happy),hap,direct,62.0,31,50,62.00% (31/50)
+슬픔(Sad),sad,direct,0.0,0,50,0.00% (0/50)
+분노(Angry),ang,direct,28.0,14,50,28.00% (14/50)
+불안(Anxious),,unsupported,,,,unsupported
+상처(Hurt),,unsupported,,,,unsupported
+당황(Embarrassed),,unsupported,,,,unsupported
+중립(Neutrality),neu,direct,30.0,15,50,30.00% (15/50)

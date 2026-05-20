@@ -15,4 +15,5 @@ dependencies = [
     "torchcodec>=0.11.0",
     "transformers>=4.57.1",
     "tqdm>=4.67.3",
+    "ipykernel>=7.2.0",
 ]

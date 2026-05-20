@@ -10,6 +10,8 @@ import torch
 from funasr import AutoModel
 from tqdm import tqdm
 
+from benchmark_common import load_samples_from_csv
+
 MODELS = {
     "plus_seed": "iic/emotion2vec_plus_seed",
     "plus_base": "iic/emotion2vec_plus_base",
@@ -219,7 +221,7 @@ def build_samples(
         random.seed(seed)
 
     for emo_dir in discover_emotion_dirs(wav_dir):
-        pool = list(emo_dir.rglob("*.wav"))
+        pool = sorted(emo_dir.rglob("*.wav"), key=lambda p: p.as_posix())
         if not pool:
             raise ValueError(f"감정 폴더 '{emo_dir.name}'에 WAV가 없습니다.")
 
@@ -302,6 +304,12 @@ def parse_args() -> argparse.Namespace:
         default=Path("results"),
         help="결과 저장 디렉터리 (기본: results)",
     )
+    p.add_argument(
+        "--sample-list-csv",
+        type=Path,
+        default=None,
+        help="기존 결과 CSV의 wav_relpath 순서를 그대로 재사용합니다.",
+    )
     return p.parse_args()
 
 
@@ -316,15 +324,25 @@ def main():
     results_dir: Path = args.results_dir
     results_dir.mkdir(parents=True, exist_ok=True)
 
-    samples, per_emotion = build_samples(
-        WAV_DIR, LABEL_DIR, n_per_emotion, args.seed
-    )
-    if use_all:
-        mode_desc = "감정당 전체"
+    if args.sample_list_csv is not None:
+        samples, per_emotion = load_samples_from_csv(
+            args.sample_list_csv, WAV_DIR, LABEL_DIR
+        )
+        mode_desc = f"샘플 목록 CSV 사용: {args.sample_list_csv}"
         seed_desc = "(샘플링 없음)"
     else:
-        mode_desc = f"감정당 {n_arg}개"
-        seed_desc = f"seed={args.seed}"
+        samples, per_emotion = build_samples(
+            WAV_DIR, LABEL_DIR, n_per_emotion, args.seed
+        )
+        if use_all:
+            mode_desc = "감정당 전체"
+            seed_desc = "(샘플링 없음)"
+        else:
+            mode_desc = f"감정당 {n_arg}개"
+            seed_desc = f"seed={args.seed}"
+    if use_all and args.sample_list_csv is None:
+        mode_desc = "감정당 전체"
+        seed_desc = "(샘플링 없음)"
     print(
         f"감정 폴더 {len(per_emotion)}개 / 샘플 총 {len(samples)}개 "
         f"({mode_desc}, {seed_desc})\n"
@@ -372,9 +390,12 @@ def main():
     meta: dict = {
         "total_files": n,
         "per_emotion_sampled": per_emotion,
-        "random_seed": None if use_all else args.seed,
-        "samples_per_emotion": None if use_all else n_arg,
-        "full_emotion_pools": use_all,
+        "random_seed": None if use_all or args.sample_list_csv else args.seed,
+        "samples_per_emotion": None if use_all or args.sample_list_csv else n_arg,
+        "sample_list_csv": (
+            args.sample_list_csv.as_posix() if args.sample_list_csv else None
+        ),
+        "full_emotion_pools": use_all and args.sample_list_csv is None,
         "models": {},
     }
     for mk, preds in all_predictions.items():

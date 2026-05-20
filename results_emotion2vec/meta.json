@@ -1,0 +1,151 @@
+{
+  "total_files": 350,
+  "per_emotion_sampled": {
+    "1.기쁨": 50,
+    "2.슬픔": 50,
+    "3.분노": 50,
+    "4.불안": 50,
+    "5.상처": 50,
+    "6.당황": 50,
+    "7.중립": 50
+  },
+  "random_seed": null,
+  "samples_per_emotion": null,
+  "sample_list_csv": "results_0408/plus_base.csv",
+  "full_emotion_pools": false,
+  "models": {
+    "plus_seed": {
+      "model_id": "iic/emotion2vec_plus_seed",
+      "elapsed_seconds": 86.3,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 107,
+          "ratio": 0.3057
+        },
+        "happy": {
+          "count": 89,
+          "ratio": 0.2543
+        },
+        "neutral": {
+          "count": 64,
+          "ratio": 0.1829
+        },
+        "sad": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "fearful": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "angry": {
+          "count": 20,
+          "ratio": 0.0571
+        }
+      }
+    },
+    "plus_base": {
+      "model_id": "iic/emotion2vec_plus_base",
+      "elapsed_seconds": 82.0,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 125,
+          "ratio": 0.3571
+        },
+        "neutral": {
+          "count": 81,
+          "ratio": 0.2314
+        },
+        "sad": {
+          "count": 52,
+          "ratio": 0.1486
+        },
+        "happy": {
+          "count": 48,
+          "ratio": 0.1371
+        },
+        "angry": {
+          "count": 26,
+          "ratio": 0.0743
+        },
+        "fearful": {
+          "count": 17,
+          "ratio": 0.0486
+        },
+        "disgusted": {
+          "count": 1,
+          "ratio": 0.0029
+        }
+      }
+    },
+    "plus_large": {
+      "model_id": "iic/emotion2vec_plus_large",
+      "elapsed_seconds": 50.7,
+      "prediction_distribution": {
+        "surprised": {
+          "count": 101,
+          "ratio": 0.2886
+        },
+        "sad": {
+          "count": 79,
+          "ratio": 0.2257
+        },
+        "happy": {
+          "count": 74,
+          "ratio": 0.2114
+        },
+        "neutral": {
+          "count": 36,
+          "ratio": 0.1029
+        },
+        "angry": {
+          "count": 35,
+          "ratio": 0.1
+        },
+        "fearful": {
+          "count": 24,
+          "ratio": 0.0686
+        },
+        "disgusted": {
+          "count": 1,
+          "ratio": 0.0029
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "gt_to_pred_mapping": {
+      "happy": "happy",
+      "sad": "sad",
+      "angry": "angry",
+      "neutrality": "neutral",
+      "anxious": "fearful",
+      "hurt": "sad",
+      "embarrassed": "surprised"
+    },
+    "overall": {
+      "plus_large": {
+        "accuracy_pct": 46.29,
+        "correct": 162,
+        "total": 350,
+        "elapsed_seconds": 50.7
+      },
+      "plus_base": {
+        "accuracy_pct": 40.29,
+        "correct": 141,
+        "total": 350,
+        "elapsed_seconds": 82.0
+      },
+      "plus_seed": {
+        "accuracy_pct": 37.43,
+        "correct": 131,
+        "total": 350,
+        "elapsed_seconds": 86.3
+      }
+    },
+    "per_emotion_plus_large_avg": {
+      "direct_mapping_emotions_mean_pct": 53.0,
+      "approximate_mapping_emotions_mean_pct": 37.33
+    }
+  }
+}

@@ -1,0 +1,2 @@
+model,task_type,count,elapsed_seconds,arousal_mean,arousal_std,arousal_min,arousal_max,dominance_mean,dominance_std,dominance_min,dominance_max,valence_mean,valence_std,valence_min,valence_max
+audeering_msp_dim,dimensional_regression,350,509.8,0.489,0.1372,0.1544,0.897,0.5436,0.1008,0.2998,0.8964,0.4565,0.1107,0.1151,0.7949

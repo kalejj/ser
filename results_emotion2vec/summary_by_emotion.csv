@@ -1,0 +1,8 @@
+emotion_display,mapped_target,mapping_type,plus_large_pct,plus_large_correct,plus_large_total,plus_large_report,plus_base_pct,plus_base_correct,plus_base_total,plus_base_report,plus_seed_pct,plus_seed_correct,plus_seed_total,plus_seed_report
+기쁨(Happy),happy,direct,56.0,28,50,56.00% (28/50),28.0,14,50,28.00% (14/50),54.0,27,50,54.00% (27/50)
+슬픔(Sad),sad,direct,80.0,40,50,80.00% (40/50),60.0,30,50,60.00% (30/50),38.0,19,50,38.00% (19/50)
+분노(Angry),angry,direct,48.0,24,50,48.00% (24/50),30.0,15,50,30.00% (15/50),26.0,13,50,26.00% (13/50)
+불안(Anxious),fearful,approximate,10.0,5,50,10.00% (5/50),8.0,4,50,8.00% (4/50),18.0,9,50,18.00% (9/50)
+상처(Hurt),sad,approximate,40.0,20,50,40.00% (20/50),24.0,12,50,24.00% (12/50),22.0,11,50,22.00% (11/50)
+당황(Embarrassed),surprised,approximate,62.0,31,50,62.00% (31/50),74.0,37,50,74.00% (37/50),62.0,31,50,62.00% (31/50)
+중립(Neutrality),neutral,direct,28.0,14,50,28.00% (14/50),58.0,29,50,58.00% (29/50),42.0,21,50,42.00% (21/50)

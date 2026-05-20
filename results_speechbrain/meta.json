@@ -1,0 +1,119 @@
+{
+  "total_files": 350,
+  "per_emotion_sampled": {
+    "1.기쁨": 50,
+    "2.슬픔": 50,
+    "3.분노": 50,
+    "4.불안": 50,
+    "5.상처": 50,
+    "6.당황": 50,
+    "7.중립": 50
+  },
+  "random_seed": null,
+  "samples_per_emotion": null,
+  "sample_list_csv": "results_0408/plus_base.csv",
+  "full_emotion_pools": false,
+  "models": {
+    "speechbrain_iemocap": {
+      "model_id": "speechbrain/emotion-recognition-wav2vec2-IEMOCAP",
+      "device": "cpu",
+      "elapsed_seconds": 479.4,
+      "prediction_distribution": {
+        "hap": {
+          "count": 241,
+          "ratio": 0.6886
+        },
+        "ang": {
+          "count": 70,
+          "ratio": 0.2
+        },
+        "neu": {
+          "count": 39,
+          "ratio": 0.1114
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "gt_to_pred_mapping": {
+      "happy": "hap",
+      "sad": "sad",
+      "angry": "ang",
+      "neutrality": "neu",
+      "anxious": null,
+      "hurt": null,
+      "embarrassed": null
+    },
+    "unsupported_gt_emotions": [
+      "anxious",
+      "hurt",
+      "embarrassed"
+    ],
+    "overall": {
+      "speechbrain_iemocap": {
+        "accuracy_pct": 30.0,
+        "correct": 60,
+        "total": 200,
+        "elapsed_seconds": 479.4
+      }
+    },
+    "by_gt_emotion": {
+      "happy": {
+        "emotion_display": "기쁨(Happy)",
+        "mapped_target": "hap",
+        "mapping_type": "direct",
+        "accuracy_pct": 62.0,
+        "correct": 31,
+        "total": 50
+      },
+      "sad": {
+        "emotion_display": "슬픔(Sad)",
+        "mapped_target": "sad",
+        "mapping_type": "direct",
+        "accuracy_pct": 0.0,
+        "correct": 0,
+        "total": 50
+      },
+      "angry": {
+        "emotion_display": "분노(Angry)",
+        "mapped_target": "ang",
+        "mapping_type": "direct",
+        "accuracy_pct": 28.0,
+        "correct": 14,
+        "total": 50
+      },
+      "anxious": {
+        "emotion_display": "불안(Anxious)",
+        "mapped_target": null,
+        "mapping_type": "unsupported",
+        "accuracy_pct": null,
+        "correct": null,
+        "total": null
+      },
+      "hurt": {
+        "emotion_display": "상처(Hurt)",
+        "mapped_target": null,
+        "mapping_type": "unsupported",
+        "accuracy_pct": null,
+        "correct": null,
+        "total": null
+      },
+      "embarrassed": {
+        "emotion_display": "당황(Embarrassed)",
+        "mapped_target": null,
+        "mapping_type": "unsupported",
+        "accuracy_pct": null,
+        "correct": null,
+        "total": null
+      },
+      "neutrality": {
+        "emotion_display": "중립(Neutrality)",
+        "mapped_target": "neu",
+        "mapping_type": "direct",
+        "accuracy_pct": 30.0,
+        "correct": 15,
+        "total": 50
+      }
+    }
+  }
+}
